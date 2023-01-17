@@ -3,11 +3,11 @@ import React from "react";
 export default class GeneralInformation extends React.Component {
   render() {
     return (
-      <div className="general-information relative">
+      <div className="general-information relative flex flex-col items-center gap-4">
         <button className="absolute right-0">Edit</button>
-        <div className="py-3 text-center text-4xl font-medium">John Doe</div>
-        <div className="flex flex-col items-center justify-center gap-4 xs:flex-row">
-          <div className="email-address flex items-center gap-0.5 text-sm">
+        <div className="text-center text-4xl font-medium">John Doe</div>
+        <div className="flex w-full flex-col items-center justify-center gap-4 xs:flex-row">
+          <div className="email-address flex items-center justify-center gap-0.5 text-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -22,9 +22,9 @@ export default class GeneralInformation extends React.Component {
                 d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
               />
             </svg>
-            <div className="break-words">johndoe@gmail.com</div>
+            <div className="break-words">johndoe@email.com</div>
           </div>
-          <div className="phone-number flex items-center gap-0.5 text-sm">
+          <div className="phone-number flex items-center justify-center gap-0.5 text-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -41,7 +41,7 @@ export default class GeneralInformation extends React.Component {
             </svg>
             <div className="break-words">123 456 7890</div>
           </div>
-          <div className="address flex items-center gap-0.5 text-sm">
+          <div className="address flex items-center justify-center gap-0.5 text-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -61,7 +61,7 @@ export default class GeneralInformation extends React.Component {
                 d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
               />
             </svg>
-            <div className="break-words">221b Baker Street</div>
+            <div className="break-words text-center">221b Baker Street</div>
           </div>
         </div>
       </div>
