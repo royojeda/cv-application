@@ -53,9 +53,9 @@ export default class GeneralInformation extends React.Component<
         )}
         <div className="text-center text-4xl font-medium">{name}</div>
         <div className="flex w-full flex-col items-center justify-center gap-4 xs:flex-row">
-          <UserInfo contentType="email" content={emailAddress} />
-          <UserInfo contentType="phone" content={phoneNumber} />
-          <UserInfo contentType="address" content={address} />
+          <UserInfo type="email" content={emailAddress} />
+          <UserInfo type="phone" content={phoneNumber} />
+          <UserInfo type="address" content={address} />
         </div>
       </div>
     );

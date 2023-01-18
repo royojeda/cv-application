@@ -1,16 +1,16 @@
 import React from "react";
 
 interface UserInfoProps {
-  contentType: "email" | "phone" | "address";
+  type: "email" | "phone" | "address";
   content: string;
 }
 
 export default class UserInfo extends React.Component<UserInfoProps> {
   render() {
-    const { contentType, content } = this.props;
+    const { type, content } = this.props;
 
     let path: JSX.Element;
-    switch (contentType) {
+    switch (type) {
       case "email":
         path = (
           <path
