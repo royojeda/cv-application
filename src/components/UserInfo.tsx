@@ -61,7 +61,6 @@ export default class UserInfo extends React.Component<UserInfoProps> {
         >
           {path}
         </svg>
-
         <div className="break-words">{content}</div>
       </div>
     );
