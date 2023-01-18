@@ -1,15 +1,17 @@
 import React, { SyntheticEvent } from "react";
 import UserInfo from "./UserInfo";
 
+interface GeneralInformationState {
+  name: string;
+  emailAddress: string;
+  phoneNumber: string;
+  address: string;
+  isEditing: boolean;
+}
+
 export default class GeneralInformation extends React.Component<
   Record<string, never>,
-  {
-    name: string;
-    emailAddress: string;
-    phoneNumber: string;
-    address: string;
-    isEditing: boolean;
-  }
+  GeneralInformationState
 > {
   constructor(props: Record<string, never>) {
     super(props);
