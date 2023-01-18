@@ -1,9 +1,11 @@
 import React from "react";
 
-export default class UserInfo extends React.Component<{
+interface UserInfoProps {
   contentType: "email" | "phone" | "address";
   content: string;
-}> {
+}
+
+export default class UserInfo extends React.Component<UserInfoProps> {
   render() {
     const { contentType, content } = this.props;
 
