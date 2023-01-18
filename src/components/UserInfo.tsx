@@ -9,7 +9,7 @@ export default class UserInfo extends React.Component<UserInfoProps> {
   render() {
     const { contentType, content } = this.props;
 
-    let path;
+    let path: JSX.Element;
     switch (contentType) {
       case "email":
         path = (
