@@ -6,7 +6,7 @@ interface GeneralInformationState {
   emailAddress: string;
   phoneNumber: string;
   address: string;
-  isEditing: boolean;
+  isHovered: boolean;
 }
 
 export default class GeneralInformation extends React.Component<
@@ -20,7 +20,7 @@ export default class GeneralInformation extends React.Component<
       emailAddress: "johndoe@email.com",
       phoneNumber: "123 456 7890",
       address: "221b Baker Street, London",
-      isEditing: false,
+      isHovered: false,
     };
   }
 
@@ -28,25 +28,25 @@ export default class GeneralInformation extends React.Component<
     event.currentTarget.classList.replace("border-white", "border-gray-200");
     event.currentTarget.classList.add("shadow-md");
     event.currentTarget.classList.remove("transition", "duration-200");
-    this.setState({ isEditing: true });
+    this.setState({ isHovered: true });
   };
 
   handleMouseLeave = (event: SyntheticEvent) => {
     event.currentTarget.classList.replace("border-gray-200", "border-white");
     event.currentTarget.classList.remove("shadow-md");
     event.currentTarget.classList.add("transition", "duration-200");
-    this.setState({ isEditing: false });
+    this.setState({ isHovered: false });
   };
 
   render() {
-    const { name, emailAddress, phoneNumber, address, isEditing } = this.state;
+    const { name, emailAddress, phoneNumber, address, isHovered } = this.state;
     return (
       <div
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
         className="general-information relative flex flex-col items-center gap-4 border border-white p-4"
       >
-        {isEditing && (
+        {isHovered && (
           <button className="absolute right-4 top-4 border py-1 px-3 shadow transition hover:bg-gray-700 hover:text-white active:bg-gray-800">
             Edit
           </button>
