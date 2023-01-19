@@ -1,7 +1,7 @@
 import React from "react";
 
 interface UserInfoProps {
-  type: "email" | "phone" | "address";
+  type: "emailAddress" | "phoneNumber" | "address";
   content: string;
 }
 
@@ -11,7 +11,7 @@ export default class UserInfo extends React.Component<UserInfoProps> {
 
     let path: JSX.Element;
     switch (type) {
-      case "email":
+      case "emailAddress":
         path = (
           <path
             strokeLinecap="round"
@@ -21,7 +21,7 @@ export default class UserInfo extends React.Component<UserInfoProps> {
         );
 
         break;
-      case "phone":
+      case "phoneNumber":
         path = (
           <path
             strokeLinecap="round"
