@@ -6,8 +6,8 @@ interface UserInfoProps {
 }
 
 export default class UserInfo extends React.Component<UserInfoProps> {
-  render() {
-    const { type, content } = this.props;
+  get icon() {
+    const { type } = this.props;
 
     let path: JSX.Element;
     switch (type) {
@@ -48,6 +48,11 @@ export default class UserInfo extends React.Component<UserInfoProps> {
         );
         break;
     }
+    return path;
+  }
+
+  render() {
+    const { content } = this.props;
 
     return (
       <div className="email-address flex items-center justify-center gap-0.5 text-sm">
@@ -59,7 +64,7 @@ export default class UserInfo extends React.Component<UserInfoProps> {
           stroke="currentColor"
           className="h-5 w-5"
         >
-          {path}
+          {this.icon}
         </svg>
         <div className="break-words">{content}</div>
       </div>
