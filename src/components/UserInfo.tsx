@@ -55,7 +55,7 @@ export default class UserInfo extends React.Component<UserInfoProps> {
     const { content } = this.props;
 
     return (
-      <div className="email-address flex items-center justify-center gap-0.5 text-sm">
+      <div className="flex items-center justify-center gap-0.5 text-sm">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -66,7 +66,7 @@ export default class UserInfo extends React.Component<UserInfoProps> {
         >
           {this.icon}
         </svg>
-        <div className="break-words">{content}</div>
+        <div className="w-full break-words border border-white">{content}</div>
       </div>
     );
   }
