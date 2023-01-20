@@ -6,6 +6,7 @@ interface GeneralInformationFormProps {
   phoneNumber: string;
   address: string;
   onUpdate: (formData: Readonly<GeneralInformationFormState>) => void;
+  onCancel: () => void;
 }
 
 interface GeneralInformationFormState {
@@ -45,12 +46,21 @@ export default class GeneralInformationForm extends React.Component<
         onSubmit={this.handleSubmit}
         className="general-information relative flex flex-col items-center gap-4 border border-white p-4"
       >
-        <button
-          type="submit"
-          className="absolute right-4 top-4 border py-1 px-3 shadow transition hover:bg-gray-700 hover:text-white active:bg-gray-800"
-        >
-          Update
-        </button>
+        <div className="absolute -right-32 -top-[1px] -bottom-[1px] flex flex-col justify-center gap-2 border bg-white p-4 shadow-md">
+          <button
+            type="submit"
+            className="border py-1 px-3 shadow transition hover:bg-gray-700 hover:text-white active:bg-gray-800"
+          >
+            Update
+          </button>
+          <button
+            type="button"
+            onClick={this.props.onCancel}
+            className="border py-1 px-3 shadow transition hover:bg-gray-700 hover:text-white active:bg-gray-800"
+          >
+            Cancel
+          </button>
+        </div>
         <input
           name="name"
           value={name}

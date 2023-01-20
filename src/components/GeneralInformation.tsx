@@ -37,6 +37,10 @@ export default class GeneralInformation extends React.Component<
     this.setState({ ...formData, isEditing: false });
   };
 
+  handleCancel = () => {
+    this.setState({ isEditing: false });
+  };
+
   render() {
     const { name, emailAddress, phoneNumber, address, isEditing } = this.state;
     return (
@@ -48,6 +52,7 @@ export default class GeneralInformation extends React.Component<
             phoneNumber={phoneNumber}
             address={address}
             onUpdate={this.handleUpdate}
+            onCancel={this.handleCancel}
           />
         ) : (
           <GeneralInformationDisplay
