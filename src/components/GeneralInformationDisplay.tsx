@@ -50,12 +50,14 @@ export default class GeneralInformationDisplay extends React.Component<
         {this.state.isHovered && (
           <button
             onClick={onEdit}
-            className="absolute right-4 top-4 border py-1 px-3 shadow transition hover:bg-gray-700 hover:text-white active:bg-gray-800"
+            className="absolute right-4 top-4 border bg-white py-1 px-3 shadow transition hover:bg-gray-700 hover:text-white active:bg-gray-800"
           >
             Edit
           </button>
         )}
-        <div className="text-center text-4xl font-medium">{name}</div>
+        <div className="max-w-full break-words text-center text-4xl font-medium">
+          {name}
+        </div>
         <div className="flex w-full flex-col items-center justify-center gap-4 xs:flex-row">
           <UserInfo type="emailAddress" content={emailAddress} />
           <UserInfo type="phoneNumber" content={phoneNumber} />
