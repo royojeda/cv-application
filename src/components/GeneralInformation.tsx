@@ -1,5 +1,6 @@
 import React from "react";
 import GeneralInformationDisplay from "./GeneralInformationDisplay";
+import GeneralInformationForm from "./GeneralInformationForm";
 
 interface GeneralInformationState {
   name: string;
@@ -28,11 +29,27 @@ export default class GeneralInformation extends React.Component<
     this.setState({ isEditing: true });
   };
 
+  handleUpdate = (
+    formData: Readonly<{
+      [abc: string]: string;
+    }>
+  ) => {
+    this.setState({ ...formData, isEditing: false });
+  };
+
   render() {
     const { name, emailAddress, phoneNumber, address, isEditing } = this.state;
     return (
       <>
-        {isEditing ? null : (
+        {isEditing ? (
+          <GeneralInformationForm
+            name={name}
+            emailAddress={emailAddress}
+            phoneNumber={phoneNumber}
+            address={address}
+            onUpdate={this.handleUpdate}
+          />
+        ) : (
           <GeneralInformationDisplay
             name={name}
             emailAddress={emailAddress}
