@@ -44,7 +44,7 @@ export default class GeneralInformationForm extends React.Component<
     return (
       <form
         onSubmit={this.handleSubmit}
-        className="general-information relative flex flex-col items-center gap-4 border border-white p-4"
+        className="general-information relative flex flex-col items-center gap-4 border p-4 shadow-md"
       >
         <div className="absolute -right-32 -top-[1px] -bottom-[1px] flex flex-col justify-center gap-2 border bg-white p-4 shadow-md">
           <button
@@ -67,7 +67,7 @@ export default class GeneralInformationForm extends React.Component<
           onChange={this.handleInputChange}
           autoFocus
           required
-          className="w-2/3 text-center text-4xl font-medium"
+          className="w-full text-center text-4xl font-medium"
         />
         <div className="flex w-full flex-col items-center justify-center gap-4 xs:flex-row">
           <div className="flex items-center justify-center gap-0.5 text-sm">
