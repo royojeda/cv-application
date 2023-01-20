@@ -86,7 +86,7 @@ export default class GeneralInformationForm extends React.Component<
               />
             </svg>
             <input
-              type="text"
+              type="email"
               name="emailAddress"
               value={emailAddress}
               onChange={this.handleInputChange}
