@@ -5,7 +5,7 @@ interface GeneralInformationFormProps {
   emailAddress: string;
   phoneNumber: string;
   address: string;
-  onUpdate: (formData: Readonly<GeneralInformationFormState>) => void;
+  onSubmit: (formData: Readonly<GeneralInformationFormState>) => void;
   onCancel: () => void;
 }
 
@@ -35,7 +35,7 @@ export default class GeneralInformationForm extends React.Component<
 
   handleSubmit: React.FormEventHandler = (event) => {
     event.preventDefault();
-    this.props.onUpdate(this.state);
+    this.props.onSubmit(this.state);
   };
 
   render() {

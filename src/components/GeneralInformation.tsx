@@ -51,7 +51,7 @@ export default class GeneralInformation extends React.Component<
             emailAddress={emailAddress}
             phoneNumber={phoneNumber}
             address={address}
-            onUpdate={this.handleUpdate}
+            onSubmit={this.handleUpdate}
             onCancel={this.handleCancel}
           />
         ) : (
