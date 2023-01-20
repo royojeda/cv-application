@@ -27,13 +27,13 @@ export default class GeneralInformationForm extends React.Component<
     };
   }
 
-  handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
+  handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     this.setState({
       [event.currentTarget.name]: event.currentTarget.value,
     });
   };
 
-  handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  handleSubmit: React.FormEventHandler = (event) => {
     event.preventDefault();
     this.props.onUpdate(this.state);
   };
