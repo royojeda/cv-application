@@ -25,14 +25,20 @@ export default class GeneralInformationDisplay extends React.Component<
   }
 
   handleMouseEnter = (event: MouseEvent) => {
-    event.currentTarget.classList.replace("border-white", "border-gray-200");
+    event.currentTarget.classList.replace(
+      "border-transparent",
+      "border-gray-200"
+    );
     event.currentTarget.classList.add("shadow-md");
     event.currentTarget.classList.remove("transition", "duration-200");
     this.setState({ isHovered: true });
   };
 
   handleMouseLeave = (event: MouseEvent) => {
-    event.currentTarget.classList.replace("border-gray-200", "border-white");
+    event.currentTarget.classList.replace(
+      "border-gray-200",
+      "border-transparent"
+    );
     event.currentTarget.classList.remove("shadow-md");
     event.currentTarget.classList.add("transition", "duration-200");
     this.setState({ isHovered: false });
@@ -45,7 +51,7 @@ export default class GeneralInformationDisplay extends React.Component<
       <div
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
-        className="general-information relative flex flex-col items-center gap-4 border border-white p-4"
+        className="general-information relative -my-2.5 mt-0 flex flex-col items-center gap-4 border border-transparent p-4"
       >
         {this.state.isHovered && (
           <button
