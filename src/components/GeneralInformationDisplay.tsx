@@ -56,7 +56,7 @@ export default class GeneralInformationDisplay extends React.Component<
         {this.state.isHovered && (
           <button
             onClick={onEdit}
-            className="absolute right-4 top-4 border bg-white py-1 px-3 shadow transition hover:bg-gray-700 hover:text-white active:bg-gray-800"
+            className="absolute -right-[1px] -top-[1px] w-[4.5rem] border bg-white py-1 px-3 shadow transition hover:bg-gray-700 hover:text-white active:bg-gray-800"
           >
             Edit
           </button>
