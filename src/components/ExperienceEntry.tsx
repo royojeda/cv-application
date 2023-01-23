@@ -2,12 +2,14 @@ import React from "react";
 
 interface ExperienceEntryProps {
   entry: {
+    id: number;
     company: string;
     position: string;
     startMonth: string;
     endMonth: string;
     details: string;
   };
+  onDelete: (id: number) => void;
 }
 
 interface ExperienceEntryState {
@@ -45,6 +47,10 @@ export default class ExperienceEntry extends React.Component<
     this.setState({ isHovered: false });
   };
 
+  handleDelete: React.MouseEventHandler = () => {
+    this.props.onDelete(this.props.entry.id);
+  };
+
   render() {
     const { company, position, startMonth, endMonth, details } =
       this.props.entry;
@@ -66,6 +72,7 @@ export default class ExperienceEntry extends React.Component<
             </button>
             <button
               type="button"
+              onClick={this.handleDelete}
               className="w-1/2 border py-1 px-3 transition hover:bg-gray-700 hover:text-white active:bg-gray-800"
             >
               Delete

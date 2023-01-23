@@ -23,7 +23,7 @@ export default class Experience extends React.Component<
       entries: [
         {
           id: 1,
-          company: "Some Big Company",
+          company: "Some Big Company 1",
           position: "Backend Engineer",
           startMonth: "2022-04",
           endMonth: "2023-01",
@@ -32,7 +32,7 @@ export default class Experience extends React.Component<
         },
         {
           id: 2,
-          company: "Some Big Company",
+          company: "Some Big Company 2",
           position: "Backend Engineer",
           startMonth: "2022-04",
           endMonth: "2023-01",
@@ -41,7 +41,7 @@ export default class Experience extends React.Component<
         },
         {
           id: 3,
-          company: "Some Big Company",
+          company: "Some Big Company 3",
           position: "Backend Engineer",
           startMonth: "2022-04",
           endMonth: "2023-01",
@@ -50,7 +50,7 @@ export default class Experience extends React.Component<
         },
         {
           id: 4,
-          company: "Some Big Company",
+          company: "Some Big Company 4",
           position: "Backend Engineer",
           startMonth: "2022-04",
           endMonth: "2023-01",
@@ -61,6 +61,12 @@ export default class Experience extends React.Component<
       nextId: 5,
     };
   }
+
+  handleDelete = (id: number) => {
+    this.setState((state) => {
+      return { entries: state.entries.filter((entry) => entry.id !== id) };
+    });
+  };
 
   render() {
     const { entries } = this.state;
@@ -74,7 +80,13 @@ export default class Experience extends React.Component<
         </div>
         <div className="flex flex-col gap-1">
           {entries.map((entry) => {
-            return <ExperienceEntry key={entry.id} entry={entry} />;
+            return (
+              <ExperienceEntry
+                key={entry.id}
+                entry={entry}
+                onDelete={this.handleDelete}
+              />
+            );
           })}
         </div>
       </div>
