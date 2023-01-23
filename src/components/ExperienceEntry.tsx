@@ -1,32 +1,46 @@
 import React from "react";
 
-export default class ExperienceEntry extends React.Component {
+interface ExperienceEntryProps {
+  entry: {
+    company: string;
+    position: string;
+    startMonth: string;
+    endMonth: string;
+    details: string;
+  };
+}
+
+export default class ExperienceEntry extends React.Component<ExperienceEntryProps> {
   render() {
+    const { company, position, startMonth, endMonth, details } =
+      this.props.entry;
+
     return (
       <div className="flex flex-col gap-1">
         <div className="flex items-end justify-between gap-4">
           <div className="flex">
-            <div className="font-medium">Some Big Company</div>
+            <div className="font-medium">{company}</div>
             <pre>, </pre>
-            <div className="italic">Software Engineer</div>
+            <div className="italic">{position}</div>
           </div>
           <div className="flex">
-            <div>April 2022</div>
+            <div>
+              {new Intl.DateTimeFormat("en-US", {
+                month: "long",
+                year: "numeric",
+              }).format(new Date(startMonth))}
+            </div>
             <pre> — </pre>
-            <div>January 2023</div>
+            <div>
+              {new Intl.DateTimeFormat("en-US", {
+                month: "long",
+                year: "numeric",
+              }).format(new Date(endMonth))}
+            </div>
           </div>
         </div>
         <ul className="list-disc pl-8">
-          <li>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti
-            possimus aliquam amet, ipsum in placeat sint? Nobis obcaecati sint
-            aliquid.
-          </li>
-          <li>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
-            distinctio assumenda, nemo quis necessitatibus tempora commodi porro
-            debitis cum itaque?
-          </li>
+          <li>{details}</li>
         </ul>
       </div>
     );
