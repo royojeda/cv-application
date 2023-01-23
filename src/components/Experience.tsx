@@ -67,10 +67,12 @@ export default class Experience extends React.Component<
 
     return (
       <div className="flex flex-col gap-1">
-        <div className="border-y border-gray-700 text-center text-lg font-medium">
-          EXPERIENCE
+        <div className="-my-2.5 border border-transparent p-4 hover:border-gray-200 hover:shadow-md">
+          <div className="border-y border-gray-700 text-center text-lg font-medium">
+            EXPERIENCE
+          </div>
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-1">
           {entries.map((entry) => {
             return <ExperienceEntry key={entry.id} entry={entry} />;
           })}
