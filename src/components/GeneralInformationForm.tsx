@@ -45,7 +45,7 @@ export default class GeneralInformationForm extends React.Component<
     return (
       <form
         onSubmit={this.handleSubmit}
-        className="general-information relative flex flex-col items-center gap-4 border p-4 shadow-md"
+        className="relative -my-2.5 mt-0 flex flex-col items-center gap-4 border border-transparent p-4"
       >
         <div className="absolute -right-32 -top-[1px] -bottom-[1px] flex flex-col justify-center gap-2 border bg-white p-4 shadow-md">
           <button
