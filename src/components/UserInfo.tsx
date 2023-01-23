@@ -66,7 +66,9 @@ export default class UserInfo extends React.Component<UserInfoProps> {
         >
           {this.icon}
         </svg>
-        <div className="w-full break-words border border-white">{content}</div>
+        <div className="w-full break-words border border-transparent">
+          {content}
+        </div>
       </div>
     );
   }
