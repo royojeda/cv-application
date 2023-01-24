@@ -10,7 +10,7 @@ export default class App extends React.Component {
           <div className="flex min-h-full max-w-2xl flex-1 flex-col gap-1 border bg-white p-4 shadow-md sm:p-8">
             <GeneralInformation />
             <Experience />
-            <div className="-my-2.5 p-4">
+            <div className="px-4 py-2">
               <div className="border-y border-gray-700 text-center text-lg font-medium">
                 EDUCATION
               </div>

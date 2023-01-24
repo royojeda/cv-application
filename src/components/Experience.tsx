@@ -94,7 +94,7 @@ export default class Experience extends React.Component<
 
     return (
       <div className="flex flex-col gap-1">
-        <div className="-my-2.5 border border-transparent p-4 hover:border-gray-200 hover:shadow-md">
+        <div className="border border-transparent px-4 py-2 hover:border-gray-200 hover:shadow-md">
           <div className="border-y border-gray-700 text-center text-lg font-medium">
             EXPERIENCE
           </div>
@@ -115,7 +115,7 @@ export default class Experience extends React.Component<
                 <div className="">
                   Are you sure you want to delete this experience entry?
                 </div>
-                <div className="flex w-40 gap-2 font-medium">
+                <div className="flex w-[9.5rem] gap-2 font-medium">
                   <button
                     onClick={this.handleDeleteCancel}
                     className="w-1/2 py-1 px-3 underline decoration-transparent decoration-2 underline-offset-2 transition hover:decoration-gray-700 active:decoration-gray-800"

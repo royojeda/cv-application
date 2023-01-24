@@ -60,10 +60,10 @@ export default class ExperienceEntry extends React.Component<
       <div
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
-        className="relative -my-2.5 flex flex-col gap-1 border border-transparent p-4 hover:border-gray-200 hover:shadow-md"
+        className="relative flex flex-col gap-1 border border-transparent px-4 py-2 hover:border-gray-200 hover:shadow-md"
       >
         {isHovered && (
-          <div className="absolute -right-[1px] -top-[1px] w-36 bg-white font-medium shadow-md">
+          <div className="absolute -right-[1px] -top-[1px] w-36 bg-white font-medium shadow">
             <button
               type="button"
               className="w-1/2 border py-1 px-3 transition hover:bg-gray-700 hover:text-white active:bg-gray-800"

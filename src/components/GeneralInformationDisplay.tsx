@@ -51,7 +51,7 @@ export default class GeneralInformationDisplay extends React.Component<
       <div
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
-        className="relative -my-2.5 mt-0 flex flex-col items-center gap-4 border border-transparent p-4"
+        className="relative flex flex-col items-center gap-4 border border-transparent px-4 py-2"
       >
         {this.state.isHovered && (
           <button
