@@ -11,6 +11,7 @@ interface ExperienceState {
     details: string;
   }[];
   nextId: number;
+  deletingId: number | null;
 }
 
 export default class Experience extends React.Component<
@@ -59,17 +60,37 @@ export default class Experience extends React.Component<
         },
       ],
       nextId: 5,
+      deletingId: null,
     };
   }
 
   handleDelete = (id: number) => {
+    this.setState({ deletingId: id });
+  };
+
+  handleDeleteConfirm = () => {
     this.setState((state) => {
-      return { entries: state.entries.filter((entry) => entry.id !== id) };
+      return {
+        entries: state.entries.filter(
+          (entry) => entry.id !== this.state.deletingId
+        ),
+        deletingId: null,
+      };
     });
   };
 
+  handleDeleteCancel = () => {
+    this.setState({ deletingId: null });
+  };
+
+  handleKeyDown: React.KeyboardEventHandler = (event) => {
+    if (event.key === "Escape") {
+      this.handleDeleteCancel();
+    }
+  };
+
   render() {
-    const { entries } = this.state;
+    const { entries, deletingId } = this.state;
 
     return (
       <div className="flex flex-col gap-1">
@@ -88,6 +109,31 @@ export default class Experience extends React.Component<
               />
             );
           })}
+          {deletingId && (
+            <div className="fixed top-0 left-0 flex h-screen w-screen items-center justify-center bg-gray-50/95">
+              <div className="flex flex-col items-end gap-4 border bg-white p-4 shadow-md">
+                <div className="">
+                  Are you sure you want to delete this experience entry?
+                </div>
+                <div className="flex w-40 gap-2 font-medium">
+                  <button
+                    onClick={this.handleDeleteCancel}
+                    className="w-1/2 py-1 px-3 underline decoration-transparent decoration-2 underline-offset-2 transition hover:decoration-gray-700 active:decoration-gray-800"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={this.handleDeleteConfirm}
+                    onKeyDown={this.handleKeyDown}
+                    autoFocus
+                    className="w-1/2 border py-1 px-3 shadow transition hover:bg-gray-700 hover:text-white active:bg-gray-800"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );
