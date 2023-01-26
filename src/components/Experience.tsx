@@ -1,5 +1,6 @@
 import React from "react";
 import ExperienceEntry from "./ExperienceEntry";
+import ExperienceEntryForm from "./ExperienceEntryForm";
 
 interface ExperienceState {
   entries: {
@@ -12,6 +13,7 @@ interface ExperienceState {
   }[];
   nextId: number;
   deletingId: number | null;
+  editingId: number | null;
 }
 
 export default class Experience extends React.Component<
@@ -61,6 +63,7 @@ export default class Experience extends React.Component<
       ],
       nextId: 5,
       deletingId: null,
+      editingId: null,
     };
   }
 
@@ -89,8 +92,37 @@ export default class Experience extends React.Component<
     }
   };
 
+  handleEdit = (id: number) => {
+    this.setState({ editingId: id });
+  };
+
+  handleEditCancel = () => {
+    this.setState({ editingId: null });
+  };
+
+  handleUpdate = (formData: {
+    company: string;
+    position: string;
+    startMonth: string;
+    endMonth: string;
+    details: string;
+  }) => {
+    this.setState((state) => {
+      const updatedEntries = state.entries.map((entry) => {
+        if (entry.id === state.editingId) {
+          entry = { ...formData, id: state.editingId };
+        }
+        return entry;
+      });
+      return {
+        entries: updatedEntries,
+        editingId: null,
+      };
+    });
+  };
+
   render() {
-    const { entries, deletingId } = this.state;
+    const { entries, deletingId, editingId } = this.state;
 
     return (
       <div className="flex flex-col gap-1">
@@ -102,11 +134,21 @@ export default class Experience extends React.Component<
         <div className="flex flex-col gap-1">
           {entries.map((entry) => {
             return (
-              <ExperienceEntry
-                key={entry.id}
-                entry={entry}
-                onDelete={this.handleDelete}
-              />
+              <React.Fragment key={entry.id}>
+                {editingId === entry.id ? (
+                  <ExperienceEntryForm
+                    entry={entry}
+                    onSubmit={this.handleUpdate}
+                    onCancel={this.handleEditCancel}
+                  />
+                ) : (
+                  <ExperienceEntry
+                    entry={entry}
+                    onEdit={this.handleEdit}
+                    onDelete={this.handleDelete}
+                  />
+                )}
+              </React.Fragment>
             );
           })}
           {deletingId && (

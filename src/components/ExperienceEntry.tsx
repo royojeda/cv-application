@@ -10,6 +10,7 @@ interface ExperienceEntryProps {
     details: string;
   };
   onDelete: (id: number) => void;
+  onEdit: (id: number) => void;
 }
 
 interface ExperienceEntryState {
@@ -51,6 +52,10 @@ export default class ExperienceEntry extends React.Component<
     this.props.onDelete(this.props.entry.id);
   };
 
+  handleEdit: React.MouseEventHandler = () => {
+    this.props.onEdit(this.props.entry.id);
+  };
+
   render() {
     const { company, position, startMonth, endMonth, details } =
       this.props.entry;
@@ -66,6 +71,7 @@ export default class ExperienceEntry extends React.Component<
           <div className="absolute -right-[1px] -top-[1px] w-36 bg-white font-medium shadow">
             <button
               type="button"
+              onClick={this.handleEdit}
               className="w-1/2 border py-1 px-3 transition hover:bg-gray-700 hover:text-white active:bg-gray-800"
             >
               Edit
@@ -81,19 +87,21 @@ export default class ExperienceEntry extends React.Component<
         )}
         <div className="flex items-end justify-between gap-4">
           <div className="flex">
-            <div className="font-medium">{company}</div>
+            <div className="border border-transparent font-medium">
+              {company}
+            </div>
             <pre>, </pre>
             <div className="italic">{position}</div>
           </div>
-          <div className="flex">
-            <div>
+          <div className="flex border border-transparent">
+            <div className="py-0.5">
               {new Intl.DateTimeFormat("en-US", {
                 month: "long",
                 year: "numeric",
               }).format(new Date(startMonth))}
             </div>
             <pre> — </pre>
-            <div>
+            <div className="py-0.5">
               {new Intl.DateTimeFormat("en-US", {
                 month: "long",
                 year: "numeric",
@@ -102,7 +110,7 @@ export default class ExperienceEntry extends React.Component<
           </div>
         </div>
         <ul className="list-disc pl-8">
-          <li>{details}</li>
+          <li className="border border-transparent">{details}</li>
         </ul>
       </div>
     );
