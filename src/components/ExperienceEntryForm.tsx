@@ -72,7 +72,7 @@ export default class ExperienceEntryForm extends React.Component<
     return (
       <form
         onSubmit={this.handleSubmit}
-        className="relative flex flex-col gap-1 border border-transparent border-gray-200 px-4 py-2 shadow-md"
+        className="relative flex flex-col gap-1 border border-gray-200 px-4 py-2 shadow-md"
       >
         <div className="absolute inset-y-[-1px] -right-40 flex items-center">
           <div className="flex justify-center bg-white shadow-md">
