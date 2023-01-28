@@ -1,7 +1,7 @@
 import React from "react";
 
 interface ExperienceEntryFormProps {
-  entry: {
+  entry?: {
     id: number;
     company: string;
     position: string;
@@ -16,7 +16,7 @@ interface ExperienceEntryFormProps {
     endMonth: string;
     details: string;
   }) => void;
-  onCancel: (id: number) => void;
+  onCancel: () => void;
 }
 
 interface ExperienceEntryFormState {
@@ -29,17 +29,27 @@ export default class ExperienceEntryForm extends React.Component<
 > {
   constructor(props: ExperienceEntryFormProps) {
     super(props);
-    this.state = {
-      company: props.entry.company,
-      position: props.entry.position,
-      startMonth: props.entry.startMonth,
-      endMonth: props.entry.endMonth,
-      details: props.entry.details,
-    };
+    if (props.entry) {
+      this.state = {
+        company: props.entry.company,
+        position: props.entry.position,
+        startMonth: props.entry.startMonth,
+        endMonth: props.entry.endMonth,
+        details: props.entry.details,
+      };
+    } else {
+      this.state = {
+        company: "",
+        position: "",
+        startMonth: "",
+        endMonth: "",
+        details: "",
+      };
+    }
   }
 
   handleCancel: React.MouseEventHandler = () => {
-    this.props.onCancel(this.props.entry.id);
+    this.props.onCancel();
   };
 
   handleInputChange: React.ChangeEventHandler<
@@ -69,7 +79,7 @@ export default class ExperienceEntryForm extends React.Component<
             type="submit"
             className="border py-1 px-3 shadow transition hover:bg-gray-700 hover:text-white active:bg-gray-800"
           >
-            Update
+            {this.props.entry ? "Update" : "Create"}
           </button>
           <button
             type="button"
@@ -87,6 +97,7 @@ export default class ExperienceEntryForm extends React.Component<
               value={company}
               placeholder="Company"
               onChange={this.handleInputChange}
+              required
               autoFocus
               className="w-1/2 border px-2"
             />
@@ -97,6 +108,7 @@ export default class ExperienceEntryForm extends React.Component<
               value={position}
               placeholder="Position"
               onChange={this.handleInputChange}
+              required
               className="w-1/2 border px-2"
             />
           </div>
@@ -106,6 +118,7 @@ export default class ExperienceEntryForm extends React.Component<
               name="startMonth"
               value={startMonth}
               onChange={this.handleInputChange}
+              required
               className="w-1/2 border"
             />
             <pre> — </pre>
@@ -114,6 +127,7 @@ export default class ExperienceEntryForm extends React.Component<
               name="endMonth"
               value={endMonth}
               onChange={this.handleInputChange}
+              required
               className="w-1/2 border"
             />
           </div>
@@ -123,6 +137,7 @@ export default class ExperienceEntryForm extends React.Component<
           value={details}
           placeholder="Details"
           onChange={this.handleInputChange}
+          required
           className="w-full resize-none border px-2"
         />
       </form>

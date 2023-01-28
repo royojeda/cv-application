@@ -14,6 +14,8 @@ interface ExperienceState {
   nextId: number;
   deletingId: number | null;
   editingId: number | null;
+  isHovered: boolean;
+  isCreating: boolean;
 }
 
 export default class Experience extends React.Component<
@@ -25,17 +27,8 @@ export default class Experience extends React.Component<
     this.state = {
       entries: [
         {
-          id: 1,
-          company: "Some Big Company 1",
-          position: "Backend Engineer",
-          startMonth: "2022-04",
-          endMonth: "2023-01",
-          details:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas culpa et inventore omnis quisquam rem in corporis harum autem? Deserunt!",
-        },
-        {
-          id: 2,
-          company: "Some Big Company 2",
+          id: 4,
+          company: "Some Big Company 4",
           position: "Backend Engineer",
           startMonth: "2022-04",
           endMonth: "2023-01",
@@ -52,8 +45,17 @@ export default class Experience extends React.Component<
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas culpa et inventore omnis quisquam rem in corporis harum autem? Deserunt!",
         },
         {
-          id: 4,
-          company: "Some Big Company 4",
+          id: 2,
+          company: "Some Big Company 2",
+          position: "Backend Engineer",
+          startMonth: "2022-04",
+          endMonth: "2023-01",
+          details:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas culpa et inventore omnis quisquam rem in corporis harum autem? Deserunt!",
+        },
+        {
+          id: 1,
+          company: "Some Big Company 1",
           position: "Backend Engineer",
           startMonth: "2022-04",
           endMonth: "2023-01",
@@ -64,6 +66,8 @@ export default class Experience extends React.Component<
       nextId: 5,
       deletingId: null,
       editingId: null,
+      isHovered: false,
+      isCreating: false,
     };
   }
 
@@ -121,17 +125,68 @@ export default class Experience extends React.Component<
     });
   };
 
+  handleMouseEnter: React.MouseEventHandler = () => {
+    this.setState({ isHovered: true });
+  };
+
+  handleMouseLeave: React.MouseEventHandler = () => {
+    this.setState({ isHovered: false });
+  };
+
+  handleNew: React.MouseEventHandler = () => {
+    this.setState({ isCreating: true });
+  };
+
+  handleCreate = (formData: {
+    company: string;
+    position: string;
+    startMonth: string;
+    endMonth: string;
+    details: string;
+  }) => {
+    this.setState((state) => {
+      return {
+        entries: [{ ...formData, id: state.nextId }, ...state.entries],
+        nextId: state.nextId + 1,
+        isCreating: false,
+      };
+    });
+  };
+
+  handleNewCancel = () => {
+    this.setState({ isCreating: false });
+  };
+
   render() {
-    const { entries, deletingId, editingId } = this.state;
+    const { entries, deletingId, editingId, isHovered, isCreating } =
+      this.state;
 
     return (
       <div className="flex flex-col gap-1">
-        <div className="border border-transparent px-4 py-2 hover:border-gray-200 hover:shadow-md">
+        <div
+          onMouseEnter={this.handleMouseEnter}
+          onMouseLeave={this.handleMouseLeave}
+          className="relative border border-transparent px-4 py-2 hover:border-gray-200 hover:shadow-md"
+        >
           <div className="border-y border-gray-700 text-center text-lg font-medium">
             EXPERIENCE
           </div>
+          {isHovered && (
+            <button
+              onClick={this.handleNew}
+              className="absolute -top-[1px] -right-[1px] w-[4.5rem] border bg-white px-3 py-1 shadow-md transition hover:bg-gray-700 hover:text-white active:bg-gray-800"
+            >
+              Add
+            </button>
+          )}
         </div>
         <div className="flex flex-col gap-1">
+          {isCreating && (
+            <ExperienceEntryForm
+              onSubmit={this.handleCreate}
+              onCancel={this.handleNewCancel}
+            />
+          )}
           {entries.map((entry) => {
             return (
               <React.Fragment key={entry.id}>
