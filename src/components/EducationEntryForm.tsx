@@ -113,7 +113,7 @@ export default class ExperienceEntryForm extends React.Component<
               value={endMonth}
               onChange={this.handleInputChange}
               required
-              className="w-1/2 border"
+              className="w-full border"
             />
           </div>
         </div>
