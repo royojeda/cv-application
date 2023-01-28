@@ -83,7 +83,7 @@ export default class ExperienceEntryForm extends React.Component<
             </button>
           </div>
         </div>
-        <div className="flex items-end justify-between gap-4">
+        <div className="flex items-center justify-between gap-4">
           <div className="flex">
             <input
               type="text"

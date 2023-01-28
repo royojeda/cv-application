@@ -82,7 +82,7 @@ export default class ExperienceEntry extends React.Component<
             </button>
           </div>
         )}
-        <div className="flex items-end justify-between gap-4">
+        <div className="flex items-center justify-between gap-4">
           <div className="flex">
             <div className="border border-transparent font-medium">
               {school}
