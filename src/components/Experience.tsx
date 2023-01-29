@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ExperienceEntry from "./ExperienceEntry";
 import ExperienceEntryForm from "./ExperienceEntryForm";
 
@@ -18,221 +18,205 @@ interface ExperienceState {
   isCreating: boolean;
 }
 
-export default class Experience extends React.Component<
-  Record<string, never>,
-  ExperienceState
-> {
-  constructor(props: Record<string, never>) {
-    super(props);
-    this.state = {
-      entries: [
-        {
-          id: 4,
-          company: "Some Big Company 4",
-          position: "Backend Engineer",
-          startMonth: "2022-04",
-          endMonth: "2023-01",
-          details:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas culpa et inventore omnis quisquam rem in corporis harum autem? Deserunt!",
-        },
-        {
-          id: 3,
-          company: "Some Big Company 3",
-          position: "Backend Engineer",
-          startMonth: "2022-04",
-          endMonth: "2023-01",
-          details:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas culpa et inventore omnis quisquam rem in corporis harum autem? Deserunt!",
-        },
-        {
-          id: 2,
-          company: "Some Big Company 2",
-          position: "Backend Engineer",
-          startMonth: "2022-04",
-          endMonth: "2023-01",
-          details:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas culpa et inventore omnis quisquam rem in corporis harum autem? Deserunt!",
-        },
-        {
-          id: 1,
-          company: "Some Big Company 1",
-          position: "Backend Engineer",
-          startMonth: "2022-04",
-          endMonth: "2023-01",
-          details:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas culpa et inventore omnis quisquam rem in corporis harum autem? Deserunt!",
-        },
-      ],
-      nextId: 5,
-      deletingId: null,
-      editingId: null,
-      isHovered: false,
-      isCreating: false,
-    };
-  }
+const Experience = () => {
+  const [state, setState] = useState<ExperienceState>({
+    entries: [
+      {
+        id: 4,
+        company: "Some Big Company 4",
+        position: "Backend Engineer",
+        startMonth: "2022-04",
+        endMonth: "2023-01",
+        details:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas culpa et inventore omnis quisquam rem in corporis harum autem? Deserunt!",
+      },
+      {
+        id: 3,
+        company: "Some Big Company 3",
+        position: "Backend Engineer",
+        startMonth: "2022-04",
+        endMonth: "2023-01",
+        details:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas culpa et inventore omnis quisquam rem in corporis harum autem? Deserunt!",
+      },
+      {
+        id: 2,
+        company: "Some Big Company 2",
+        position: "Backend Engineer",
+        startMonth: "2022-04",
+        endMonth: "2023-01",
+        details:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas culpa et inventore omnis quisquam rem in corporis harum autem? Deserunt!",
+      },
+      {
+        id: 1,
+        company: "Some Big Company 1",
+        position: "Backend Engineer",
+        startMonth: "2022-04",
+        endMonth: "2023-01",
+        details:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas culpa et inventore omnis quisquam rem in corporis harum autem? Deserunt!",
+      },
+    ],
+    nextId: 5,
+    deletingId: null,
+    editingId: null,
+    isHovered: false,
+    isCreating: false,
+  });
 
-  handleDelete = (id: number) => {
-    this.setState({ deletingId: id });
+  const handleDelete = (id: number) => {
+    setState({ ...state, deletingId: id });
   };
 
-  handleDeleteConfirm = () => {
-    this.setState((state) => {
-      return {
-        entries: state.entries.filter(
-          (entry) => entry.id !== this.state.deletingId
-        ),
-        deletingId: null,
-      };
+  const handleDeleteConfirm = () => {
+    setState({
+      ...state,
+      entries: state.entries.filter((entry) => entry.id !== state.deletingId),
+      deletingId: null,
     });
   };
 
-  handleDeleteCancel = () => {
-    this.setState({ deletingId: null });
+  const handleDeleteCancel = () => {
+    setState({ ...state, deletingId: null });
   };
 
-  handleKeyDown: React.KeyboardEventHandler = (event) => {
+  const handleKeyDown: React.KeyboardEventHandler = (event) => {
     if (event.key === "Escape") {
-      this.handleDeleteCancel();
+      handleDeleteCancel();
     }
   };
 
-  handleEdit = (id: number) => {
-    this.setState({ editingId: id });
+  const handleEdit = (id: number) => {
+    setState({ ...state, editingId: id });
   };
 
-  handleEditCancel = () => {
-    this.setState({ editingId: null });
+  const handleEditCancel = () => {
+    setState({ ...state, editingId: null });
   };
 
-  handleUpdate = (formData: {
+  const handleUpdate = (formData: {
     company: string;
     position: string;
     startMonth: string;
     endMonth: string;
     details: string;
   }) => {
-    this.setState((state) => {
-      const updatedEntries = state.entries.map((entry) => {
-        if (entry.id === state.editingId) {
-          entry = { ...formData, id: state.editingId };
-        }
-        return entry;
-      });
-      return {
-        entries: updatedEntries,
-        editingId: null,
-      };
+    const updatedEntries = state.entries.map((entry) => {
+      if (entry.id === state.editingId) {
+        entry = { ...formData, id: state.editingId };
+      }
+      return entry;
     });
+    setState({ ...state, entries: updatedEntries, editingId: null });
   };
 
-  handleMouseEnter: React.MouseEventHandler = () => {
-    this.setState({ isHovered: true });
+  const handleMouseEnter: React.MouseEventHandler = () => {
+    setState({ ...state, isHovered: true });
   };
 
-  handleMouseLeave: React.MouseEventHandler = () => {
-    this.setState({ isHovered: false });
+  const handleMouseLeave: React.MouseEventHandler = () => {
+    setState({ ...state, isHovered: false });
   };
 
-  handleNew: React.MouseEventHandler = () => {
-    this.setState({ isCreating: true });
+  const handleNew: React.MouseEventHandler = () => {
+    setState({ ...state, isCreating: true });
   };
 
-  handleCreate = (formData: {
+  const handleCreate = (formData: {
     company: string;
     position: string;
     startMonth: string;
     endMonth: string;
     details: string;
   }) => {
-    this.setState((state) => {
-      return {
-        entries: [{ ...formData, id: state.nextId }, ...state.entries],
-        nextId: state.nextId + 1,
-        isCreating: false,
-      };
+    setState({
+      ...state,
+      entries: [{ ...formData, id: state.nextId }, ...state.entries],
+      nextId: state.nextId + 1,
+      isCreating: false,
     });
   };
 
-  handleNewCancel = () => {
-    this.setState({ isCreating: false });
+  const handleNewCancel = () => {
+    setState({ ...state, isCreating: false });
   };
 
-  render() {
-    const { entries, deletingId, editingId, isHovered, isCreating } =
-      this.state;
+  const { entries, deletingId, editingId, isHovered, isCreating } = state;
 
-    return (
-      <div className="flex flex-col gap-1">
-        <div
-          onMouseEnter={this.handleMouseEnter}
-          onMouseLeave={this.handleMouseLeave}
-          className="relative border border-transparent px-4 py-2 hover:border-gray-200 hover:shadow-md"
-        >
-          <div className="border-y border-gray-700 text-center text-lg font-medium">
-            EXPERIENCE
-          </div>
-          {isHovered && (
-            <button
-              onClick={this.handleNew}
-              className="absolute -top-[1px] -right-[1px] w-[4.5rem] border bg-white px-3 py-1 shadow-md transition hover:bg-gray-700 hover:text-white active:bg-gray-800"
-            >
-              Add
-            </button>
-          )}
+  return (
+    <div className="flex flex-col gap-1">
+      <div
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className="relative border border-transparent px-4 py-2 hover:border-gray-200 hover:shadow-md"
+      >
+        <div className="border-y border-gray-700 text-center text-lg font-medium">
+          EXPERIENCE
         </div>
-        <div className="flex flex-col gap-1">
-          {isCreating && (
-            <ExperienceEntryForm
-              onSubmit={this.handleCreate}
-              onCancel={this.handleNewCancel}
-            />
-          )}
-          {entries.map((entry) => {
-            return (
-              <React.Fragment key={entry.id}>
-                {editingId === entry.id ? (
-                  <ExperienceEntryForm
-                    entry={entry}
-                    onSubmit={this.handleUpdate}
-                    onCancel={this.handleEditCancel}
-                  />
-                ) : (
-                  <ExperienceEntry
-                    entry={entry}
-                    onEdit={this.handleEdit}
-                    onDelete={this.handleDelete}
-                  />
-                )}
-              </React.Fragment>
-            );
-          })}
-          {deletingId && (
-            <div className="fixed top-0 left-0 flex h-screen w-screen items-center justify-center bg-gray-50/95">
-              <div className="flex flex-col items-end gap-4 border bg-white p-4 shadow-md">
-                <div className="">
-                  Are you sure you want to delete this experience entry?
-                </div>
-                <div className="flex w-[9.5rem] gap-2 font-medium">
-                  <button
-                    onClick={this.handleDeleteCancel}
-                    className="w-1/2 py-1 px-3 underline decoration-transparent decoration-2 underline-offset-2 transition hover:decoration-gray-700 active:decoration-gray-800"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={this.handleDeleteConfirm}
-                    onKeyDown={this.handleKeyDown}
-                    autoFocus
-                    className="w-1/2 border py-1 px-3 shadow transition hover:bg-gray-700 hover:text-white active:bg-gray-800"
-                  >
-                    Delete
-                  </button>
-                </div>
+        {isHovered && (
+          <button
+            onClick={handleNew}
+            className="absolute -top-[1px] -right-[1px] w-[4.5rem] border bg-white px-3 py-1 shadow-md transition hover:bg-gray-700 hover:text-white active:bg-gray-800"
+          >
+            Add
+          </button>
+        )}
+      </div>
+      <div className="flex flex-col gap-1">
+        {isCreating && (
+          <ExperienceEntryForm
+            onSubmit={handleCreate}
+            onCancel={handleNewCancel}
+          />
+        )}
+        {entries.map((entry) => {
+          return (
+            <React.Fragment key={entry.id}>
+              {editingId === entry.id ? (
+                <ExperienceEntryForm
+                  entry={entry}
+                  onSubmit={handleUpdate}
+                  onCancel={handleEditCancel}
+                />
+              ) : (
+                <ExperienceEntry
+                  entry={entry}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
+                />
+              )}
+            </React.Fragment>
+          );
+        })}
+        {deletingId && (
+          <div className="fixed top-0 left-0 flex h-screen w-screen items-center justify-center bg-gray-50/95">
+            <div className="flex flex-col items-end gap-4 border bg-white p-4 shadow-md">
+              <div className="">
+                Are you sure you want to delete this experience entry?
+              </div>
+              <div className="flex w-[9.5rem] gap-2 font-medium">
+                <button
+                  onClick={handleDeleteCancel}
+                  className="w-1/2 py-1 px-3 underline decoration-transparent decoration-2 underline-offset-2 transition hover:decoration-gray-700 active:decoration-gray-800"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleDeleteConfirm}
+                  onKeyDown={handleKeyDown}
+                  autoFocus
+                  className="w-1/2 border py-1 px-3 shadow transition hover:bg-gray-700 hover:text-white active:bg-gray-800"
+                >
+                  Delete
+                </button>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default Experience;

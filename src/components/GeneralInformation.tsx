@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import GeneralInformationDisplay from "./GeneralInformationDisplay";
 import GeneralInformationForm from "./GeneralInformationForm";
 
@@ -10,60 +10,55 @@ interface GeneralInformationState {
   isEditing: boolean;
 }
 
-export default class GeneralInformation extends React.Component<
-  Record<string, never>,
-  GeneralInformationState
-> {
-  constructor(props: Record<string, never>) {
-    super(props);
-    this.state = {
-      name: "John Doe",
-      emailAddress: "johndoe@email.com",
-      phoneNumber: "123 456 7890",
-      address: "221b Baker Street, London",
-      isEditing: false,
-    };
-  }
+const GeneralInformation = () => {
+  const [state, setState] = useState<GeneralInformationState>({
+    name: "John Doe",
+    emailAddress: "johndoe@email.com",
+    phoneNumber: "123 456 7890",
+    address: "221b Baker Street, London",
+    isEditing: false,
+  });
 
-  handleEdit = () => {
-    this.setState({ isEditing: true });
+  const handleEdit = () => {
+    setState({ ...state, isEditing: true });
   };
 
-  handleUpdate = (
+  const handleUpdate = (
     formData: Readonly<{
       [abc: string]: string;
     }>
   ) => {
-    this.setState({ ...formData, isEditing: false });
+    setState({ ...state, ...formData, isEditing: false });
   };
 
-  handleCancel = () => {
-    this.setState({ isEditing: false });
+  const handleCancel = () => {
+    setState({ ...state, isEditing: false });
   };
 
-  render() {
-    const { name, emailAddress, phoneNumber, address, isEditing } = this.state;
-    return (
-      <>
-        {isEditing ? (
-          <GeneralInformationForm
-            name={name}
-            emailAddress={emailAddress}
-            phoneNumber={phoneNumber}
-            address={address}
-            onSubmit={this.handleUpdate}
-            onCancel={this.handleCancel}
-          />
-        ) : (
-          <GeneralInformationDisplay
-            name={name}
-            emailAddress={emailAddress}
-            phoneNumber={phoneNumber}
-            address={address}
-            onEdit={this.handleEdit}
-          />
-        )}
-      </>
-    );
-  }
-}
+  const { name, emailAddress, phoneNumber, address, isEditing } = state;
+
+  return (
+    <>
+      {isEditing ? (
+        <GeneralInformationForm
+          name={name}
+          emailAddress={emailAddress}
+          phoneNumber={phoneNumber}
+          address={address}
+          onSubmit={handleUpdate}
+          onCancel={handleCancel}
+        />
+      ) : (
+        <GeneralInformationDisplay
+          name={name}
+          emailAddress={emailAddress}
+          phoneNumber={phoneNumber}
+          address={address}
+          onEdit={handleEdit}
+        />
+      )}
+    </>
+  );
+};
+
+export default GeneralInformation;

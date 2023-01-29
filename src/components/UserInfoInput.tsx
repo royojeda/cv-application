@@ -6,9 +6,9 @@ interface UserInfoInputProps {
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-export default class UserInfoInput extends React.Component<UserInfoInputProps> {
-  get icon() {
-    const { type } = this.props;
+const UserInfoInput = (props: UserInfoInputProps) => {
+  const getIcon = () => {
+    const { type } = props;
 
     let path: JSX.Element;
     switch (type) {
@@ -50,32 +50,32 @@ export default class UserInfoInput extends React.Component<UserInfoInputProps> {
         break;
     }
     return path;
-  }
+  };
 
-  render() {
-    const { type, content, onChange } = this.props;
+  const { type, content, onChange } = props;
 
-    return (
-      <div className="flex items-center justify-center gap-0.5 text-sm">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="h-5 w-5"
-        >
-          {this.icon}
-        </svg>
-        <input
-          type={type === "emailAddress" ? "email" : "text"}
-          name={type}
-          value={content}
-          onChange={onChange}
-          required
-          className="w-full break-words border px-2"
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="flex items-center justify-center gap-0.5 text-sm">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="h-5 w-5"
+      >
+        {getIcon()}
+      </svg>
+      <input
+        type={type === "emailAddress" ? "email" : "text"}
+        name={type}
+        value={content}
+        onChange={onChange}
+        required
+        className="w-full break-words border px-2"
+      />
+    </div>
+  );
+};
+
+export default UserInfoInput;

@@ -1,13 +1,11 @@
-import React from "react";
-
 interface UserInfoProps {
   type: "emailAddress" | "phoneNumber" | "address";
   content: string;
 }
 
-export default class UserInfo extends React.Component<UserInfoProps> {
-  get icon() {
-    const { type } = this.props;
+const UserInfo = (props: UserInfoProps) => {
+  const getIcon = () => {
+    const { type } = props;
 
     let path: JSX.Element;
     switch (type) {
@@ -49,27 +47,27 @@ export default class UserInfo extends React.Component<UserInfoProps> {
         break;
     }
     return path;
-  }
+  };
 
-  render() {
-    const { content } = this.props;
+  const { content } = props;
 
-    return (
-      <div className="flex items-center justify-center gap-0.5 text-sm">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="h-5 w-5"
-        >
-          {this.icon}
-        </svg>
-        <div className="w-full break-words border border-transparent">
-          {content}
-        </div>
+  return (
+    <div className="flex items-center justify-center gap-0.5 text-sm">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="h-5 w-5"
+      >
+        {getIcon()}
+      </svg>
+      <div className="w-full break-words border border-transparent">
+        {content}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default UserInfo;
